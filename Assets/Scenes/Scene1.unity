@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &496642799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6692717178608312104, guid: 032f50877739a48479ebf08d45dfd2d9, type: 3}
-  m_PrefabInstance: {fileID: 1055825639}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &582276451
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +276,6 @@ MonoBehaviour:
   - {fileID: -7231051530576147127, guid: ce051e7e631d9ad4c94eebde22750eb4, type: 3}
   m_hero: {fileID: 1959172596}
   spawnTime: 1
-  UI: {fileID: 496642799}
   MainCamera: {fileID: 1962277146}
 --- !u!4 &739727226
 Transform:
@@ -309,7 +303,7 @@ GameObject:
   - component: {fileID: 745173300}
   - component: {fileID: 745173302}
   - component: {fileID: 745173301}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ground
   m_TagString: GrassGround
   m_Icon: {fileID: 0}
@@ -578,7 +572,7 @@ GameObject:
   - component: {fileID: 1455265628}
   - component: {fileID: 1455265630}
   - component: {fileID: 1455265629}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ground
   m_TagString: GrassGround
   m_Icon: {fileID: 0}
@@ -689,7 +683,7 @@ GameObject:
   - component: {fileID: 1707155840}
   - component: {fileID: 1707155842}
   - component: {fileID: 1707155841}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ground (1)
   m_TagString: GrassGround
   m_Icon: {fileID: 0}

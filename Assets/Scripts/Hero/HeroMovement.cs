@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HeroMovement : MonoBehaviour
 {
@@ -29,7 +30,14 @@ public class HeroMovement : MonoBehaviour
         Jump();
         Flip();
         //HandleAttackInput();
-
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            transform.position = new Vector3(
+        Mathf.Clamp(transform.position.x, -9f, 9f),
+        transform.position.y,
+        transform.position.z
+        );
+        }
     }
 
     private void Jump()
@@ -116,6 +124,5 @@ public class HeroMovement : MonoBehaviour
         {
             animator.SetBool("isJump", false);
         }
-        
     }
 }

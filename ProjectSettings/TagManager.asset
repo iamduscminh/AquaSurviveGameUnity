@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyBone
   - Rock
+  - StrawBerry
   layers:
   - Default
   - TransparentFX

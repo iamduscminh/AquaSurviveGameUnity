@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float speed = 5f;
+    private float jumpingPower = 12f;
     private bool isFacingRight = true;
     private bool isPunch, isCut, isSuperPunch;
     Animator animator;
-
+    string word;
+    [SerializeField] private Collider2D collider;
+    bool isGround;
+/*    private int apples = 0;*/
+    [SerializeField] private Text appleText;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -42,11 +47,16 @@ public class HeroMovement : MonoBehaviour
 
     private void Jump()
     {
+        isGround = collider.IsTouchingLayers(groundLayer);
+       
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isJump", true);
-
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            if(isGround)
+            {
+                animator.SetBool("isJump", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }    
+            
         }
 
         if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && rb.velocity.y > 0f)
@@ -124,5 +134,23 @@ public class HeroMovement : MonoBehaviour
         {
             animator.SetBool("isJump", false);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       /* if (collision.gameObject.CompareTag("Apple"))
+        {
+            Destroy(collision.gameObject);
+            apples++;
+            appleText.text = "Apple: " + apples + "\n\n" + "Word: " + word;
+        }*/
+
+        if (collision.gameObject.CompareTag("StrawBerry"))
+        {
+            word = "BRAVE";
+            Destroy(collision.gameObject);
+            appleText.text =  "Word: " + word;
+        }
+
     }
 }

@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2deb22560cf3b3449d56cceba13e2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 2559094655236199243}
+  appleText: {fileID: 0}
   rb: {fileID: 2559094655236199246}
   groundCheck: {fileID: 2559094655973834726}
   groundLayer:

@@ -9,11 +9,15 @@ TagManager:
   - EnemyBone
   - Rock
   - StrawBerry
+  - Gate
+  - Platform
+  - FallingPlatform
   - TextA
   - TextB
   - TextR
   - TextV
   - TextE
+  
   layers:
   - Default
   - TransparentFX

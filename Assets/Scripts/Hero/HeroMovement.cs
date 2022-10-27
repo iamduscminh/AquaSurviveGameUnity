@@ -21,6 +21,7 @@ public class HeroMovement : MonoBehaviour
     string E = "E";
     [SerializeField] private Collider2D collider;
     bool isGround;
+    bool isPlatform;
 /*    private int apples = 0;*/
     [SerializeField] private Text appleText;
     [SerializeField] private Rigidbody2D rb;
@@ -41,6 +42,15 @@ public class HeroMovement : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Scene4")
         {
             speed = 8f;
+            jumpingPower = 12f;
+        }
+        if (isPlatform)
+        {
+            speed = 3.4f;
+            jumpingPower = 7f;
+        } else if(!isPlatform)
+        {
+            speed = 6f;
             jumpingPower = 12f;
         }
 
@@ -153,6 +163,19 @@ public class HeroMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("GrassGround"))
         {
             animator.SetBool("isJump", false);
+            isPlatform = false;
+        }
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            rb.interpolation = RigidbodyInterpolation2D.None;
+            animator.SetBool("isJump", false);
+            isPlatform = true;
+
+        }
+        if (collision.gameObject.CompareTag("FallingPlatform"))
+        {
+            animator.SetBool("isJump", false);
+            isPlatform = false;
         }
     }
 
@@ -164,6 +187,14 @@ public class HeroMovement : MonoBehaviour
              apples++;
              appleText.text = "Apple: " + apples + "\n\n" + "Word: " + word;
          }*/
+
+        if (collision.gameObject.CompareTag("Gate"))
+        {
+            isPlatform = false;
+            SceneManager.LoadScene(2);
+        }
+
+
         if (collision.gameObject.CompareTag("TextB"))
         {
             word[0] = B;

@@ -9,6 +9,11 @@ TagManager:
   - EnemyBone
   - Rock
   - StrawBerry
+  - TextA
+  - TextB
+  - TextR
+  - TextV
+  - TextE
   layers:
   - Default
   - TransparentFX

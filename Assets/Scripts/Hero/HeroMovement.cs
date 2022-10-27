@@ -12,7 +12,13 @@ public class HeroMovement : MonoBehaviour
     private bool isFacingRight = true;
     private bool isPunch, isCut, isSuperPunch;
     Animator animator;
-    string word;
+    string[] word = new string[5];
+    string sort;
+    string B = "B";
+    string R = "R";
+    string A = "A";
+    string V = "V";
+    string E = "E";
     [SerializeField] private Collider2D collider;
     bool isGround;
 /*    private int apples = 0;*/
@@ -152,19 +158,52 @@ public class HeroMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       /* if (collision.gameObject.CompareTag("Apple"))
+        /* if (collision.gameObject.CompareTag("Apple"))
+         {
+             Destroy(collision.gameObject);
+             apples++;
+             appleText.text = "Apple: " + apples + "\n\n" + "Word: " + word;
+         }*/
+        if (collision.gameObject.CompareTag("TextB"))
         {
+            word[0] = B;
             Destroy(collision.gameObject);
-            apples++;
-            appleText.text = "Apple: " + apples + "\n\n" + "Word: " + word;
-        }*/
 
-        if (collision.gameObject.CompareTag("StrawBerry"))
-        {
-            word = "BRAVE";
-            Destroy(collision.gameObject);
-            appleText.text =  "Word: " + word;
         }
 
+        else if (collision.gameObject.CompareTag("TextR"))
+        {
+            word[1] = R;
+            Destroy(collision.gameObject);
+
+        }
+
+        else if (collision.gameObject.CompareTag("TextA"))
+        {
+            word[2] = A;
+            Destroy(collision.gameObject);
+
+        }
+
+        else if (collision.gameObject.CompareTag("TextV"))
+        {
+            word[3] = V;
+            Destroy(collision.gameObject);
+
+        }
+
+        else if (collision.gameObject.CompareTag("TextE"))
+        {
+            word[4] = E;
+            Destroy(collision.gameObject);
+
+        }
+        word[0] = word[0] == null ? "?" : word[0];
+        word[1] = word[1] == null ? "?" : word[1];
+        word[2] = word[2] == null ? "?" : word[2];
+        word[3] = word[3] == null ? "?" : word[3];
+        word[4] = word[4] == null ? "?" : word[4];
+
+        appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
     }
 }

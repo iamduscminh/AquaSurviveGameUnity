@@ -30,8 +30,6 @@ public class Rock : MonoBehaviour
             //m_isGrounded = true;
             Destroy(gameObject, 0.5f);
 
-            GameManager1.Ins.Score++;
-
             //GameGUIManager.Ins.UpdateScoreCounting(GameManager.Ins.Score);
             //GameGUIManager.Ins.MoveNextScene(GameManager.Ins.Score);
             AudioController.Ins.PlaySound(AudioController.Ins.landSound);
@@ -50,5 +48,6 @@ public class Rock : MonoBehaviour
             AudioController.Ins.PlaySound(AudioController.Ins.landSound);
             AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
         }
+        GameManager1.Ins.Score++;
     }
 }

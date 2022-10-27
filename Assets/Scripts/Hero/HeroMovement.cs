@@ -191,7 +191,8 @@ public class HeroMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Gate"))
         {
             isPlatform = false;
-            SceneManager.LoadScene(2);
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(sceneIndex+1);
         }
 
 
@@ -229,12 +230,16 @@ public class HeroMovement : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
-        word[0] = word[0] == null ? "?" : word[0];
-        word[1] = word[1] == null ? "?" : word[1];
-        word[2] = word[2] == null ? "?" : word[2];
-        word[3] = word[3] == null ? "?" : word[3];
-        word[4] = word[4] == null ? "?" : word[4];
 
-        appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            word[0] = word[0] == null ? "?" : word[0];
+            word[1] = word[1] == null ? "?" : word[1];
+            word[2] = word[2] == null ? "?" : word[2];
+            word[3] = word[3] == null ? "?" : word[3];
+            word[4] = word[4] == null ? "?" : word[4];
+
+            appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
+        }
     }
 }

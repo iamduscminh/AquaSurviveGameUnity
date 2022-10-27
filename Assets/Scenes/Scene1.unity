@@ -276,7 +276,7 @@ MonoBehaviour:
   - {fileID: -7231051530576147127, guid: ce051e7e631d9ad4c94eebde22750eb4, type: 3}
   m_hero: {fileID: 1959172596}
   spawnTime: 1
-  MainCamera: {fileID: 1962277146}
+  HousePrefabs: {fileID: 8610912474749382367, guid: 35e522ad9cb02f04c90d3d58228eb449, type: 3}
 --- !u!4 &739727226
 Transform:
   m_ObjectHideFlags: 0
@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 745173300}
   - component: {fileID: 745173302}
   - component: {fileID: 745173301}
+  - component: {fileID: 745173303}
   m_Layer: 6
   m_Name: Ground
   m_TagString: GrassGround
@@ -403,6 +404,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &745173303
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745173299}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &898397403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,6 +594,7 @@ GameObject:
   - component: {fileID: 1455265628}
   - component: {fileID: 1455265630}
   - component: {fileID: 1455265629}
+  - component: {fileID: 1455265631}
   m_Layer: 6
   m_Name: Ground
   m_TagString: GrassGround
@@ -672,6 +695,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &1455265631
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455265627}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1707155839
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +727,7 @@ GameObject:
   - component: {fileID: 1707155840}
   - component: {fileID: 1707155842}
   - component: {fileID: 1707155841}
+  - component: {fileID: 1707155843}
   m_Layer: 6
   m_Name: Ground (1)
   m_TagString: GrassGround
@@ -783,6 +828,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &1707155843
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707155839}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1762697676
 GameObject:
   m_ObjectHideFlags: 0

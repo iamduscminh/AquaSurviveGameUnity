@@ -32,6 +32,12 @@ public class HeroMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        if(SceneManager.GetActiveScene().name == "Scene4")
+        {
+            speed = 8f;
+            jumpingPower = 12f;
+        }
+
         Jump();
         Flip();
         //HandleAttackInput();
@@ -51,7 +57,15 @@ public class HeroMovement : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            if(isGround)
+            if(SceneManager.GetActiveScene().name != "Scene4")
+            {
+                if (isGround)
+                {
+                    animator.SetBool("isJump", true);
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                }
+            }
+            else
             {
                 animator.SetBool("isJump", true);
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);

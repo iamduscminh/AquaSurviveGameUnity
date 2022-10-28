@@ -57,14 +57,14 @@ public class HeroMovement : MonoBehaviour
         Jump();
         Flip();
         //HandleAttackInput();
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+/*        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             transform.position = new Vector3(
         Mathf.Clamp(transform.position.x, -9f, 9f),
         transform.position.y,
         transform.position.z
         );
-        }
+        }*/
     }
 
     private void Jump()
@@ -176,6 +176,11 @@ public class HeroMovement : MonoBehaviour
         {
             animator.SetBool("isJump", false);
             isPlatform = false;
+        }
+        if (collision.gameObject.CompareTag("Saw"))
+        {
+            gameObject.GetComponent<Health>().TakeDamage(0.5f);
+            transform.position = new Vector3(-9f, 0f, 0f);
         }
     }
 

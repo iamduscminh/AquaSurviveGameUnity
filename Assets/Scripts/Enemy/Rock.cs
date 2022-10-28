@@ -38,7 +38,6 @@ public class Rock : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //if (m_isDead) return;
-            Rock rock = collision.gameObject.GetComponent<Rock>();
             HeroMovement hero = collision.gameObject.GetComponent<HeroMovement>();
             hero.GetComponent<Health>().TakeDamage(0.5f);
             Destroy(gameObject, 0.5f);

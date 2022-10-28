@@ -8,6 +8,7 @@ public class GameManager1 : Singleton<GameManager1>
     public Rock[] RockPrefabs;
     public HeroMovement m_hero;
     public Object HousePrefabs;
+    public Object Barrier;
 
     int m_score;
     bool m_isGameover;
@@ -72,7 +73,7 @@ public class GameManager1 : Singleton<GameManager1>
             }
         }
 
-        Instantiate(HousePrefabs, new Vector3(7f, -2f, 0f), Quaternion.identity);
+        Destroy(Barrier);
 
         yield return null;
     }

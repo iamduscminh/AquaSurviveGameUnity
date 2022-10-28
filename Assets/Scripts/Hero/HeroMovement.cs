@@ -57,14 +57,14 @@ public class HeroMovement : MonoBehaviour
         Jump();
         Flip();
         //HandleAttackInput();
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+/*        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             transform.position = new Vector3(
         Mathf.Clamp(transform.position.x, -9f, 9f),
         transform.position.y,
         transform.position.z
         );
-        }
+        }*/
     }
 
     private void Jump()
@@ -177,6 +177,11 @@ public class HeroMovement : MonoBehaviour
             animator.SetBool("isJump", false);
             isPlatform = false;
         }
+        if (collision.gameObject.CompareTag("Saw"))
+        {
+            gameObject.GetComponent<Health>().TakeDamage(0.5f);
+            transform.position = new Vector3(-9f, 0f, 0f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -191,7 +196,8 @@ public class HeroMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Gate"))
         {
             isPlatform = false;
-            SceneManager.LoadScene(2);
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(sceneIndex+1);
         }
 
 
@@ -229,12 +235,16 @@ public class HeroMovement : MonoBehaviour
             Destroy(collision.gameObject);
 
         }
-        word[0] = word[0] == null ? "?" : word[0];
-        word[1] = word[1] == null ? "?" : word[1];
-        word[2] = word[2] == null ? "?" : word[2];
-        word[3] = word[3] == null ? "?" : word[3];
-        word[4] = word[4] == null ? "?" : word[4];
 
-        appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            word[0] = word[0] == null ? "?" : word[0];
+            word[1] = word[1] == null ? "?" : word[1];
+            word[2] = word[2] == null ? "?" : word[2];
+            word[3] = word[3] == null ? "?" : word[3];
+            word[4] = word[4] == null ? "?" : word[4];
+
+            appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
+        }
     }
 }

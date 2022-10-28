@@ -7,8 +7,8 @@ public class GameManager1 : Singleton<GameManager1>
 {
     public Rock[] RockPrefabs;
     public HeroMovement m_hero;
-    public float spawnTime;
-    public Object MainCamera;
+    public Object HousePrefabs;
+    public Object Barrier;
 
     int m_score;
     bool m_isGameover;
@@ -55,7 +55,7 @@ public class GameManager1 : Singleton<GameManager1>
 
         if (RockPrefabs != null && RockPrefabs.Length > 0)
         {
-            while (!m_isGameover && Score < 9)
+            while (!m_isGameover && Score < 29)
             {
                 int randIndex = Random.Range(0, RockPrefabs.Length);
 
@@ -64,13 +64,16 @@ public class GameManager1 : Singleton<GameManager1>
                     //Instantiate: tao ra 1 doi tuong tren scenes
                     Instantiate(RockPrefabs[randIndex], new Vector3(m_hero.transform.position.x, Random.Range(6f, 9f), 0f), Quaternion.identity);
                 }
-
-                yield return new WaitForSeconds(spawnTime);
+                if(Score < 10)
+                    yield return new WaitForSeconds(1f);
+                else if (Score < 20)
+                    yield return new WaitForSeconds(0.75f);
+                else
+                    yield return new WaitForSeconds(0.5f);
             }
         }
-        
 
-        SceneManager.LoadScene(1);
+        Destroy(Barrier);
 
         yield return null;
     }

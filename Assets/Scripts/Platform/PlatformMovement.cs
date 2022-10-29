@@ -18,7 +18,6 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
         if (transform.position == pos_1.position)
         {
             nextPos = pos_2.position;

@@ -23,7 +23,8 @@ public class FallingPlatform : MonoBehaviour
         {
             StartCoroutine(Fall());
         }
-        if(collision.gameObject.CompareTag("GrassGround"))
+        if(collision.gameObject.CompareTag("GrassGround") || collision.gameObject.CompareTag("Platform") ||
+            collision.gameObject.CompareTag("FallingPlatform"))
         {
             Destroy(gameObject);
         }
@@ -31,7 +32,7 @@ public class FallingPlatform : MonoBehaviour
 
     IEnumerator Fall()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.09f);
         rigidbody.isKinematic = false;
     }
 }

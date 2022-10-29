@@ -190,7 +190,15 @@ public class HeroMovement : MonoBehaviour
                 transform.position = heroPos.Peek();
             }
         }
+        if (SceneManager.GetActiveScene().name == "Scene3")
+        {
+            if (collision.gameObject.CompareTag("TrapFire"))
+            {
+                gameObject.GetComponent<Health>().TakeDamage(0.5f);
+            }
+        }
     }
+            
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

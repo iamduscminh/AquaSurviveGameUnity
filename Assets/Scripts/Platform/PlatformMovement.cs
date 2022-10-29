@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlatformMovement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+     
         if (transform.position == pos_1.position)
         {
             nextPos = pos_2.position;
@@ -37,18 +39,24 @@ public class PlatformMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*if (collision.gameObject.CompareTag("Player"))
+        if (SceneManager.GetActiveScene().name == "Scene2")
         {
-            collision.gameObject.transform.SetParent(transform);
-        }*/
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.transform.SetParent(transform);
+            }
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-       /* if (collision.gameObject.CompareTag("Player"))
+        if (SceneManager.GetActiveScene().name == "Scene2")
         {
-            collision.gameObject.transform.SetParent(null);
-        }*/
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.transform.SetParent(null);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

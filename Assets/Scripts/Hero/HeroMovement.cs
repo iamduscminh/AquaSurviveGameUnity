@@ -180,7 +180,9 @@ public class HeroMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Saw"))
         {
             gameObject.GetComponent<Health>().TakeDamage(0.5f);
-            transform.position = new Vector3(-9f, 0f, 0f);
+            AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+                transform.position = new Vector3(-9f, 0f, 0f);
         }
     }
 

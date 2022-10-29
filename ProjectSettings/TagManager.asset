@@ -19,6 +19,7 @@ TagManager:
   - TextE
   - Saw
   - CheckPoint
+  - TrapFire
   layers:
   - Default
   - TransparentFX

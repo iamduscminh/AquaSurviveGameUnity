@@ -18,6 +18,7 @@ TagManager:
   - TextV
   - TextE
   - Saw
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

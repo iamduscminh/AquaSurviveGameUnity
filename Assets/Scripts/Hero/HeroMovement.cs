@@ -22,11 +22,13 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private Collider2D collider;
     bool isGround;
     bool isPlatform;
-/*    private int apples = 0;*/
+    /*    private int apples = 0;*/
     [SerializeField] private Text appleText;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    Stack<Vector3> heroPos = new Stack<Vector3>();
+    Stack<string> checkPoint = new Stack<string>();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class HeroMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if(SceneManager.GetActiveScene().name == "Scene4")
+        if (SceneManager.GetActiveScene().name == "Scene4")
         {
             speed = 8f;
             jumpingPower = 12f;
@@ -48,7 +50,8 @@ public class HeroMovement : MonoBehaviour
         {
             speed = 3.4f;
             jumpingPower = 7f;
-        } else if(!isPlatform)
+        }
+        else if (!isPlatform)
         {
             speed = 6f;
             jumpingPower = 12f;
@@ -57,23 +60,23 @@ public class HeroMovement : MonoBehaviour
         Jump();
         Flip();
         //HandleAttackInput();
-/*        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            transform.position = new Vector3(
-        Mathf.Clamp(transform.position.x, -9f, 9f),
-        transform.position.y,
-        transform.position.z
-        );
-        }*/
+        /*        if (SceneManager.GetActiveScene().buildIndex == 0)
+                {
+                    transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x, -9f, 9f),
+                transform.position.y,
+                transform.position.z
+                );
+                }*/
     }
 
     private void Jump()
     {
         isGround = collider.IsTouchingLayers(groundLayer);
-       
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            if(SceneManager.GetActiveScene().name != "Scene4")
+            if (SceneManager.GetActiveScene().name != "Scene4")
             {
                 if (isGround)
                 {
@@ -85,8 +88,8 @@ public class HeroMovement : MonoBehaviour
             {
                 animator.SetBool("isJump", true);
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            }    
-            
+            }
+
         }
 
         if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && rb.velocity.y > 0f)
@@ -177,12 +180,14 @@ public class HeroMovement : MonoBehaviour
             animator.SetBool("isJump", false);
             isPlatform = false;
         }
+
         if (collision.gameObject.CompareTag("Saw"))
         {
             gameObject.GetComponent<Health>().TakeDamage(0.5f);
+            transform.position = heroPos.Peek();
             AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
-            if (SceneManager.GetActiveScene().buildIndex != 0)
-                transform.position = new Vector3(-9f, 0f, 0f);
+            //if (SceneManager.GetActiveScene().buildIndex != 0)
+            //    transform.position = new Vector3(-9f, 0f, 0f);
         }
     }
 
@@ -197,11 +202,11 @@ public class HeroMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Gate"))
         {
+            heroPos.Clear();
             isPlatform = false;
             int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(sceneIndex+1);
+            SceneManager.LoadScene(sceneIndex + 1);
         }
-
 
         if (collision.gameObject.CompareTag("TextB"))
         {
@@ -238,7 +243,7 @@ public class HeroMovement : MonoBehaviour
 
         }
 
-        if(SceneManager.GetActiveScene().buildIndex == 2)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             word[0] = word[0] == null ? "?" : word[0];
             word[1] = word[1] == null ? "?" : word[1];
@@ -247,6 +252,16 @@ public class HeroMovement : MonoBehaviour
             word[4] = word[4] == null ? "?" : word[4];
 
             appleText.text = "Word: " + word[0] + " - " + word[1] + " - " + word[2] + " - " + word[3] + " - " + word[4];
+        }
+
+        if(collision.gameObject.CompareTag("CheckPoint"))
+        {
+            if(!checkPoint.Contains(collision.gameObject.name))
+            {
+                checkPoint.Push(collision.gameObject.name);
+                Vector2 vector = new Vector2(transform.position.x, transform.position.y);
+                heroPos.Push(vector);
+            }
         }
     }
 }

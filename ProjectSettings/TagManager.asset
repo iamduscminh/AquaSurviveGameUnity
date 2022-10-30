@@ -20,6 +20,9 @@ TagManager:
   - Saw
   - CheckPoint
   - TrapFire
+  - Button
+  - Key
+  - Lock
   layers:
   - Default
   - TransparentFX

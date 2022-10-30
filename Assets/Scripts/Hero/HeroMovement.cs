@@ -197,6 +197,13 @@ public class HeroMovement : MonoBehaviour
                 gameObject.GetComponent<Health>().TakeDamage(0.5f);
             }
         }
+        if(SceneManager.GetActiveScene().name == "Scene2")
+        {
+            if(collision.gameObject.CompareTag("Button"))
+            {
+                Destroy(GameObject.Find("KeyHolder").gameObject);
+            }
+        }
     }
             
 

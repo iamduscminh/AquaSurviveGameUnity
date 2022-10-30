@@ -29,4 +29,21 @@ public class PatrolBehavior : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            if (moveRight == true)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                moveRight = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                moveRight = true;
+            }
+        }
+    }
 }

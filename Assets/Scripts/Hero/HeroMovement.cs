@@ -221,7 +221,18 @@ public class HeroMovement : MonoBehaviour
             heroPos.Clear();
             isPlatform = false;
             int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(sceneIndex + 1);
+            if (sceneIndex == 2)
+            {
+                if (word[0] == B && word[1] == R && word[2] == A && word[3] == V && word[4] == E)
+                {
+                    SceneManager.LoadScene(sceneIndex + 1);
+                }
+
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneIndex + 1);
+            }
         }
 
         if (collision.gameObject.CompareTag("TextB"))

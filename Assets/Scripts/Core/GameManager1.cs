@@ -26,21 +26,21 @@ public class GameManager1 : Singleton<GameManager1>
     
     public override void Start()
     {
-        /*if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            GameGUIManager.Ins.ShowGameGui(false);
-        } else
+            GameGUIManager.Ins.ShowHomeGui(true);
+        }
+        else
         {
             PlayGame();
-        }*/
-        PlayGame();
+        }
     }
     
 
     public void PlayGame()
     {
         StartCoroutine(Spawn());
-        //GameGUIManager.Ins.ShowGameGui(true);
+        GameGUIManager.Ins.ShowHomeGui(false);
     }
 
     IEnumerator Spawn()

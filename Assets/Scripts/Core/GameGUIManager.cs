@@ -7,23 +7,50 @@ using UnityEngine.SceneManagement;
 public class GameGUIManager : Singleton<GameGUIManager>
 {
 
-    public Text scoreCountingText;
+    public GameObject homeGui;
+    public GameObject gameoverGui;
+
     public override void Awake()
     {
         MakeSingleton(false);
     }
 
-    public void MoveNextScene(int score)
+    public void ShowHomeGui(bool iShow)
     {
-        if(score == 10)
-        {
-            StartCoroutine(Wait());
-        }
+        if (homeGui)
+            homeGui.SetActive(iShow);
     }
 
-    IEnumerator Wait()
+    public void ShowGameoverGui(bool iShow)
     {
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(1);
+        if (homeGui)
+            homeGui.SetActive(iShow);
+    }
+
+    public void Play()
+    {
+        GameManager1.Ins.PlayGame();
+    }
+
+    public void Setting()
+    {
+       //do something here
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Application.Quit();
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Home()
+    {
+        ShowGameoverGui(false);
+        ShowHomeGui(true);
     }
 }

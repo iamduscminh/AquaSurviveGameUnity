@@ -10,6 +10,5 @@ public class EnemyFireballHolder : MonoBehaviour
     {
         Debug.Log($"Enemy: {enemy.localScale} --- Fire : {transform.localScale}" );
         
-        transform.localScale = enemy.localScale;
     }
 }

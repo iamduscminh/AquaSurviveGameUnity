@@ -9,7 +9,8 @@ public class EnemyProjectile : EnemyDamage
     private float lifetime;
     private Animator anim;
     private BoxCollider2D coll;
-
+    public GameObject enemyParentGO;
+    public int EnemyDirection { get { return (enemyParentGO.transform.localScale.x > 0) ? 1 : -1; } }
     private bool hit;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class EnemyProjectile : EnemyDamage
     private void Update()
     {
         if (hit) return;
-        float movementSpeed = speed * Time.deltaTime;
+        float movementSpeed = speed * EnemyDirection * Time.deltaTime;
         transform.Translate(movementSpeed, 0, 0);
         lifetime += Time.deltaTime;
         if (lifetime > resetTime)

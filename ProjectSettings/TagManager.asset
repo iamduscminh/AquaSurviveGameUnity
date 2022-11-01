@@ -12,17 +12,13 @@ TagManager:
   - Gate
   - Platform
   - FallingPlatform
-  - TextA
-  - TextB
-  - TextR
-  - TextV
-  - TextE
   - Saw
   - CheckPoint
   - TrapFire
   - Button
   - Key
   - Lock
+  - GateLevel
   layers:
   - Default
   - TransparentFX

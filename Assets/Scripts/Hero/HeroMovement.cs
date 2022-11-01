@@ -40,12 +40,8 @@ public class HeroMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (SceneManager.GetActiveScene().name == "Scene4")
-        {
-            speed = 8f;
-            jumpingPower = 12f;
-        }
+        
+        
         if (isPlatform)
         {
             speed = 3.4f;
@@ -56,7 +52,12 @@ public class HeroMovement : MonoBehaviour
             speed = 6f;
             jumpingPower = 12f;
         }
-
+        if (SceneManager.GetActiveScene().name == "Scene4")
+        {
+            speed = 12f;
+            jumpingPower = 18f;
+        }
+        Debug.Log(speed + "----" + jumpingPower);
         Jump();
         Flip();
         //HandleAttackInput();
@@ -76,19 +77,19 @@ public class HeroMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            if (SceneManager.GetActiveScene().name != "Scene4")
-            {
+            //if (SceneManager.GetActiveScene().name )
+            //{
                 if (isGround)
                 {
                     animator.SetBool("isJump", true);
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 }
-            }
-            else
-            {
-                animator.SetBool("isJump", true);
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            }
+            //}
+            //else
+            //{
+            //    animator.SetBool("isJump", true);
+            //    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            //}
 
         }
 

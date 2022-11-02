@@ -19,6 +19,12 @@ TagManager:
   - Key
   - Lock
   - GateLevel
+  - TextA
+  - TextB
+  - TextR
+  - TextV
+  - TextE
+
   layers:
   - Default
   - TransparentFX

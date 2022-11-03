@@ -23,8 +23,8 @@ public class GameGUIManager : Singleton<GameGUIManager>
 
     public void ShowGameoverGui(bool iShow)
     {
-        if (homeGui)
-            homeGui.SetActive(iShow);
+        if (gameoverGui)
+            gameoverGui.SetActive(iShow);
     }
 
     public void Play()
@@ -34,7 +34,7 @@ public class GameGUIManager : Singleton<GameGUIManager>
 
     public void Setting()
     {
-       //do something here
+        //do something here
     }
 
     public void Quit()
@@ -48,9 +48,4 @@ public class GameGUIManager : Singleton<GameGUIManager>
         SceneManager.LoadScene(0);
     }
 
-    public void Home()
-    {
-        ShowGameoverGui(false);
-        ShowHomeGui(true);
-    }
 }

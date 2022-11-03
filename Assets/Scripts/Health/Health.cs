@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -22,11 +21,7 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = PlayerPrefs.GetFloat("_currentHealth");
-        if(SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            currentHealth = startingHealth;
-        }
+        currentHealth = startingHealth;
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
     }
@@ -34,6 +29,7 @@ public class Health : MonoBehaviour
     {
         if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+
         if (currentHealth > 0)
         {
             anim.SetTrigger("isTakeHit");
@@ -52,8 +48,6 @@ public class Health : MonoBehaviour
                 dead = true;
             }
         }
-        PlayerPrefs.SetFloat("_currentHealth", currentHealth);
-        PlayerPrefs.Save();
     }
     public void AddHealth(float _value)
     {

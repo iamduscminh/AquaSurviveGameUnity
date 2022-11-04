@@ -17,6 +17,8 @@ public class GoblinMonster : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
 
+    public HealthBarEnemy HealthBar;
+
     //References
     private Animator anim;
     private Health playerHealth;
@@ -26,10 +28,14 @@ public class GoblinMonster : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<MonsterPatrol>();
+        //playerHealth = GetComponent<Health>();
+        HealthBar.SetHealth(playerHealth.startingHealth, playerHealth.startingHealth);
     }
 
     private void Update()
     {
+        Debug.Log($"CurHealth: {playerHealth.currentHealth} --- Starting {playerHealth.startingHealth}");
+        HealthBar.SetHealth(playerHealth.currentHealth, playerHealth.startingHealth);
         cooldownTimer += Time.deltaTime;
 
         //Attack only when player in sight?

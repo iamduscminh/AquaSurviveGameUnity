@@ -8,29 +8,24 @@ public class HealthBarEnemy : MonoBehaviour
 
     [SerializeField] private Health enemyHealth;
     public Slider slider;
-    public Gradient gradient;
-    public Image fill;
+    public Color Low;
+    public Color High;
+    public Vector3 Offset;
 
-    private void Start()
-    {
-        SetMaxHealth(enemyHealth.startingHealth);
-    }
     private void Update()
     {
-        SetHealth(enemyHealth.currentHealth);
+
+        //SetHealth(enemyHealth.startingHealth, enemyHealth.startingHealth);
+        slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + Offset);
     }
 
-    public void SetMaxHealth(float health)
+    public void SetHealth(float curHealth, float maxHealth)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        slider.gameObject.SetActive(curHealth < maxHealth);
+        slider.value = curHealth;
+        slider.maxValue = maxHealth;
 
-        fill.color = gradient.Evaluate(1f);
+        slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(Low, High, slider.normalizedValue);
     }
-
-    public void SetHealth(float health)
-    {
-        slider.value = health;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
-    }
+    
 }

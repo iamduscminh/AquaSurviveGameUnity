@@ -57,7 +57,6 @@ public class HeroMovement : MonoBehaviour
             speed = 12f;
             jumpingPower = 18f;
         }
-        Debug.Log(speed + "----" + jumpingPower);
         Jump();
         Flip();
         //HandleAttackInput();

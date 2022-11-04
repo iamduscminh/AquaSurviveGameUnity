@@ -46,6 +46,9 @@ public class Health : MonoBehaviour
                     component.enabled = false;
 
                 dead = true;
+
+                GameGUIManager.Ins.ShowGameoverGui(true);
+                GameGUIManager.Ins.ShowHomeGui(false);
             }
         }
     }

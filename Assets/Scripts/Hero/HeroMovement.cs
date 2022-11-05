@@ -21,12 +21,14 @@ public class HeroMovement : MonoBehaviour
     string E = "E";
     [SerializeField] private Collider2D collider;
     bool isGround;
+    bool isPush;
     bool isPlatform;
     /*    private int apples = 0;*/
     [SerializeField] private Text appleText;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask pushLayer;
     Stack<Vector3> heroPos = new Stack<Vector3>();
     Stack<string> checkPoint = new Stack<string>();
     // Start is called before the first frame update
@@ -40,12 +42,20 @@ public class HeroMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        
+        rb.velocity = new Vector2(horizontal * speed,rb.velocity.y);
         
         if (isPlatform)
         {
-            speed = 3.4f;
-            jumpingPower = 7f;
+            if (SceneManager.GetActiveScene().name == "Scene3")
+            {
+                speed = 7f;
+                jumpingPower = 7f;
+            }
+            else
+            {
+                speed = 3.4f;
+                jumpingPower = 7f;
+            }
         }
         else if (!isPlatform)
         {
@@ -73,16 +83,27 @@ public class HeroMovement : MonoBehaviour
     private void Jump()
     {
         isGround = collider.IsTouchingLayers(groundLayer);
-
+        isPush = collider.IsTouchingLayers(pushLayer);
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             //if (SceneManager.GetActiveScene().name )
             //{
+            if (SceneManager.GetActiveScene().name == "Scene3")
+            {
+                if(isGround || isPush)
+                {
+                    animator.SetBool("isJump", true);
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                }    
+            }
+            else
+            {
                 if (isGround)
                 {
                     animator.SetBool("isJump", true);
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 }
+            }
             //}
             //else
             //{
@@ -180,17 +201,31 @@ public class HeroMovement : MonoBehaviour
             animator.SetBool("isJump", false);
             isPlatform = false;
         }
-
-        if (collision.gameObject.CompareTag("Saw"))
+        if (SceneManager.GetActiveScene().name == "Scene3")
         {
-            gameObject.GetComponent<Health>().TakeDamage(0.5f);
-            AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
-            if (SceneManager.GetActiveScene().buildIndex != 0)
+            if (collision.gameObject.CompareTag("Saw"))
             {
-                transform.position = heroPos.Peek();
+                gameObject.GetComponent<Health>().TakeDamage(0.5f);
+
+                transform.position = new Vector3(-9f, 0f, 0f);
             }
         }
-        if (SceneManager.GetActiveScene().name == "Scene3")
+        else
+        {
+
+            if (collision.gameObject.CompareTag("Saw"))
+            {
+                gameObject.GetComponent<Health>().TakeDamage(0.5f);
+                AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
+                if (SceneManager.GetActiveScene().buildIndex != 0)
+                {
+                    transform.position = heroPos.Peek();
+                }
+            }
+        }
+
+        
+            if (SceneManager.GetActiveScene().name == "Scene3")
         {
             if (collision.gameObject.CompareTag("TrapFire"))
             {

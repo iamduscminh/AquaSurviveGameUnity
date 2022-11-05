@@ -24,6 +24,7 @@ TagManager:
   - TextR
   - TextV
   - TextE
+  - Heal
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Push
   - 
   - 
   - 

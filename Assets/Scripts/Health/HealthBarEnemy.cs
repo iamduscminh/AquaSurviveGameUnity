@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class HealthBarEnemy : MonoBehaviour
 {
-
-    [SerializeField] private Health enemyHealth;
     public Slider slider;
     public Color Low;
     public Color High;
@@ -14,8 +12,6 @@ public class HealthBarEnemy : MonoBehaviour
 
     private void Update()
     {
-
-        //SetHealth(enemyHealth.startingHealth, enemyHealth.startingHealth);
         slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + Offset);
     }
 

@@ -54,8 +54,8 @@ public class HeroMovement : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Scene4")
         {
-            speed = 12f;
-            jumpingPower = 18f;
+            speed = 8f;
+            jumpingPower = 14f;
         }
         Jump();
         Flip();

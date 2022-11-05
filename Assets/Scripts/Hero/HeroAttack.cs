@@ -66,7 +66,7 @@ public class HeroAttack : MonoBehaviour
         
         foreach (Collider2D attackEnemy in attackEnemies)
         {
-            Debug.Log("hit "+ attackEnemy.name);
+            attackEnemy.GetComponent<HealthEnemy>().TakeDamage(1);
         }
     }
 
@@ -77,8 +77,7 @@ public class HeroAttack : MonoBehaviour
 
         foreach (Collider2D attackEnemy in attackEnemies)
         {
-            attackEnemy.GetComponent<Health>().TakeDamage(1);
-            Debug.Log("hit " + attackEnemy.name + "Health: " + attackEnemy.GetComponent<Health>().currentHealth);
+            attackEnemy.GetComponent<HealthEnemy>().TakeDamage(1);
         }
     }
 

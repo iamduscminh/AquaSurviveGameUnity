@@ -14,7 +14,7 @@ public class MonsterPatrol : MonoBehaviour
     [Header("Movement parameters")]
     [SerializeField] private float speed;
     private Vector3 initScale;
-    private bool movingLeft;
+    public bool movingLeft;
 
     [Header("Idle Behaviour")]
     [SerializeField] private float idleDuration;
@@ -50,7 +50,7 @@ public class MonsterPatrol : MonoBehaviour
         }
     }
 
-    private void DirectionChange()
+    public void DirectionChange()
     {
         anim.SetBool("isRun", false);
         idleTimer += Time.deltaTime;

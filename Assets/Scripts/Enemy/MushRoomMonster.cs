@@ -21,11 +21,13 @@ public class MushRoomMonster : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
     private MonsterPatrol enemyPatrol;
+    private HeroMovement playerMove;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<MonsterPatrol>();
+         
     }
 
     private void Update()
@@ -35,6 +37,15 @@ public class MushRoomMonster : MonoBehaviour
         //Attack only when player in sight?
         if (PlayerInSight())
         {
+
+            //if(playerMove.transform.localScale.x / transform.localScale.x < 0)
+            //{
+            //    Debug.Log(playerMove.transform.localScale.x + " " + transform.localScale.x);
+            //    Vector3 localScale = transform.localScale;
+            //    localScale.x *= -1f;
+            //    transform.localScale = localScale;
+            //}
+
             if (cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
@@ -42,8 +53,10 @@ public class MushRoomMonster : MonoBehaviour
             }
         }
 
-        if (enemyPatrol != null)
-            enemyPatrol.enabled = !PlayerInSight();
+        if (enemyPatrol != null) {  
+             
+             enemyPatrol.enabled = !PlayerInSight();
+        }
     }
 
     private bool PlayerInSight()
@@ -54,7 +67,11 @@ public class MushRoomMonster : MonoBehaviour
             0, Vector2.left, 0, playerLayer);
 
         if (hit.collider != null)
+        {
             playerHealth = hit.transform.GetComponent<Health>();
+            playerMove = hit.transform.GetComponent<HeroMovement>();
+        }
+            
 
         return hit.collider != null;
     }

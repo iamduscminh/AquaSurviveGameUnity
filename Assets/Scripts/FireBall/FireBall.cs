@@ -33,9 +33,10 @@ public class FireBall : MonoBehaviour
         anim.SetTrigger("isExplode");
 
         if (collision.tag == "Enemy")
+        {
             collision.GetComponent<HealthEnemy>().TakeDamage(1);
-        if (collision.tag == "Player")
-            collision.GetComponent<Health>().TakeDamage(1);
+        }
+            
     }
     public void SetDirection(float _direction)
     {

@@ -7,6 +7,7 @@ public class HeroAttack : MonoBehaviour
     public Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
+    public int powerLove = 0;
     public LayerMask enemyLayers;
 
 
@@ -25,27 +26,29 @@ public class HeroAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) && cooldownTimer > attackCooldown)
         {
             Punch();
-
-
         }
         if (Input.GetKeyDown(KeyCode.K) && cooldownTimer > attackCooldown)
         {
             Cut();
-
         }
-        if (Input.GetKeyDown(KeyCode.L) && cooldownTimer > attackCooldown )
+        if (Input.GetKeyDown(KeyCode.L) && cooldownTimer > attackCooldown)
             SuperPunch();
+        if (Input.GetKeyDown(KeyCode.U) && cooldownTimer > attackCooldown)
+            Unlock();
 
         cooldownTimer += Time.deltaTime;
+
     }
-   
+
     private void SuperPunch()
     {
         animator.SetTrigger("isSuperPunch");
         cooldownTimer = 0;
-
-        fireballs[FindFireball()].transform.position = firePoint.position;
-        fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
+        if (powerLove > 3)
+        {
+            fireballs[FindFireball()].transform.position = firePoint.position;
+            fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
+        }
     }
     private int FindFireball()
     {
@@ -58,12 +61,12 @@ public class HeroAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    
+
     void Punch()
     {
         animator.SetTrigger("isPunch");
         Collider2D[] attackEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        
+
         foreach (Collider2D attackEnemy in attackEnemies)
         {
             attackEnemy.GetComponent<HealthEnemy>().TakeDamage(1);
@@ -80,12 +83,29 @@ public class HeroAttack : MonoBehaviour
             attackEnemy.GetComponent<HealthEnemy>().TakeDamage(1);
         }
     }
+    void Unlock()
+    {
+        animator.SetTrigger("isUnlock");
+        Collider2D[] attackEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D attackEnemy in attackEnemies)
+        {
+            if (attackEnemy.tag == "Prison" && this.powerLove == 7)
+            {
+                Destroy(attackEnemy.gameObject);
+                EndGame();
+            }
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
-        if(attackPoint == null) return;
+        if (attackPoint == null) return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    private void EndGame()
+    {
     }
 
 }

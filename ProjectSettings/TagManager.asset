@@ -25,6 +25,7 @@ TagManager:
   - TextV
   - TextE
   - Heal
+  - Patrol
   layers:
   - Default
   - TransparentFX

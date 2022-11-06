@@ -238,6 +238,13 @@ public class HeroMovement : MonoBehaviour
             {
                 Destroy(GameObject.Find("KeyHolder").gameObject);
             }
+            if (collision.gameObject.CompareTag("Patrol"))
+            {
+                if (collision.collider.GetType() == typeof(PolygonCollider2D))
+                {
+                    gameObject.GetComponent<Health>().TakeDamage(0.5f);
+                }
+            }
         }
     }
             

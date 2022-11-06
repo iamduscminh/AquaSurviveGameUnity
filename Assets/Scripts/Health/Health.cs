@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -21,7 +22,12 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = startingHealth;
+        //currentHealth = startingHealth;
+        currentHealth = PlayerPrefs.GetFloat("_currentHealth");
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            currentHealth = startingHealth;
+        }
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
     }
@@ -51,10 +57,14 @@ public class Health : MonoBehaviour
                 GameGUIManager.Ins.ShowHomeGui(false);
             }
         }
+        PlayerPrefs.SetFloat("_currentHealth", currentHealth);
+        PlayerPrefs.Save();
     }
     public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+        PlayerPrefs.SetFloat("_currentHealth", currentHealth);
+        PlayerPrefs.Save();
     }
     private IEnumerator Invunerability()
     {

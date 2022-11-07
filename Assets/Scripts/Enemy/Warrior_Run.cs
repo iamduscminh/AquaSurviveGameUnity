@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Warrior_Run : StateMachineBehaviour
 {
-	public float speed = 2.5f;
-	public float attackRange = 3f;
+	public float attackRangeAffect = 7f;
 
 	Transform player;
 	Rigidbody2D rb;
 	WarriorEnemy boss;
-	HealthEnemy bossHealth;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,23 +16,20 @@ public class Warrior_Run : StateMachineBehaviour
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<WarriorEnemy>();
-        bossHealth = animator.GetComponent<HealthEnemy>();
 
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-        boss.LookAtPlayer();
-		
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-		Vector2 newPos = Vector2.MoveTowards(rb.position, target, boss.speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
+        if (Vector2.Distance(player.position, rb.position) <= attackRangeAffect)
+        {
+			boss.LookAtPlayer();
 
-        //if (Vector2.Distance(player.position, rb.position) <= attackRange)
-        //{
-        //    animator.SetTrigger("isAttack");
-        //}
+			Vector2 target = new Vector2(player.position.x, rb.position.y);
+			Vector2 newPos = Vector2.MoveTowards(rb.position, target, boss.speed * Time.fixedDeltaTime);
+			rb.MovePosition(newPos);
+		}
     }
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -27,7 +27,7 @@ public class WarriorEnemy : MonoBehaviour
     private Health playerHealth;
     private MonsterPatrol enemyPatrol;
     private SpriteRenderer sprite;
-
+    [SerializeField] private AudioClip CutSound;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -46,6 +46,7 @@ public class WarriorEnemy : MonoBehaviour
             if (cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
+                AudioController.Ins.PlaySound(CutSound);
                 anim.SetTrigger("isAttack");
             }
         }

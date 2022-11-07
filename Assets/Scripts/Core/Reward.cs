@@ -9,6 +9,7 @@ public class Reward : MonoBehaviour
     public TextMeshProUGUI MyscoreText;
     public int Scorenum;
     public GameObject hero;
+    [SerializeField] private AudioClip CollectSound;
     void Start()
     {
         Scorenum = 0;
@@ -19,10 +20,12 @@ public class Reward : MonoBehaviour
     {
         if(collision.tag == "Reward")
         {
+            AudioController.Ins.PlaySound(CollectSound);
             Scorenum++;
             Destroy(collision.gameObject);
             MyscoreText.text = "x " + Scorenum;
             hero.GetComponent<HeroAttack>().powerLove+=1;
+            
         }      
     }
 }

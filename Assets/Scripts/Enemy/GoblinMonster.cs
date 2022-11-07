@@ -8,7 +8,7 @@ public class GoblinMonster : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float damage;
-
+    [SerializeField] public float speed;
     [Header("Collider Parameters")]
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -16,6 +16,8 @@ public class GoblinMonster : MonoBehaviour
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
+    public Transform player;
+    public bool isFlipped = false;
 
     //References
     private Animator anim;
@@ -70,5 +72,23 @@ public class GoblinMonster : MonoBehaviour
     {
         if (PlayerInSight())
             playerHealth.TakeDamage(damage);
+    }
+    public void LookAtPlayer()
+    {
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if (transform.position.x > player.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = false;
+        }
+        else if (transform.position.x < player.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = true;
+        }
     }
 }

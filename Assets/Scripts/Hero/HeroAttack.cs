@@ -16,6 +16,12 @@ public class HeroAttack : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject[] fireballs;
 
+    [Header("Attack Sound")]
+    [SerializeField] private AudioClip PunchSound;
+    [SerializeField] private AudioClip CutSound;
+    [SerializeField] private AudioClip SuperPunchSound;
+    [SerializeField] private AudioClip UnlockSound;
+
     private HeroMovement heroMovement;
     private float cooldownTimer = Mathf.Infinity;
 
@@ -25,16 +31,25 @@ public class HeroAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J) && cooldownTimer > attackCooldown)
         {
+            AudioController.Ins.PlaySound(PunchSound);
             Punch();
         }
         if (Input.GetKeyDown(KeyCode.K) && cooldownTimer > attackCooldown)
         {
+            AudioController.Ins.PlaySound(CutSound);
             Cut();
         }
         if (Input.GetKeyDown(KeyCode.L) && cooldownTimer > attackCooldown)
+        {
+            AudioController.Ins.PlaySound(SuperPunchSound);
             SuperPunch();
+        }
         if (Input.GetKeyDown(KeyCode.U) && cooldownTimer > attackCooldown)
+        {
+            AudioController.Ins.PlaySound(UnlockSound);
             Unlock();
+        }
+            
 
         cooldownTimer += Time.deltaTime;
 
@@ -44,7 +59,7 @@ public class HeroAttack : MonoBehaviour
     {
         animator.SetTrigger("isSuperPunch");
         cooldownTimer = 0;
-        if (powerLove > 3)
+        if (powerLove > 2)
         {
             fireballs[FindFireball()].transform.position = firePoint.position;
             fireballs[FindFireball()].GetComponent<FireBall>().SetDirection(Mathf.Sign(transform.localScale.x));
@@ -89,8 +104,8 @@ public class HeroAttack : MonoBehaviour
         Collider2D[] attackEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D attackEnemy in attackEnemies)
         {
-            //if (attackEnemy.tag == "Prison" && this.powerLove == 1)
-            if (attackEnemy.tag == "Prison" )
+            if (attackEnemy.tag == "Prison" && this.powerLove == 4)
+                //if (attackEnemy.tag == "Prison" )
             {
                 Destroy(attackEnemy.gameObject);
                 StartCoroutine(EndGame());

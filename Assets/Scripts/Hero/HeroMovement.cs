@@ -236,6 +236,7 @@ public class HeroMovement : MonoBehaviour
         {
             if(collision.gameObject.CompareTag("Button"))
             {
+                Destroy(GameObject.Find("Button").gameObject);
                 Destroy(GameObject.Find("KeyHolder").gameObject);
             }
             if (collision.gameObject.CompareTag("Patrol"))

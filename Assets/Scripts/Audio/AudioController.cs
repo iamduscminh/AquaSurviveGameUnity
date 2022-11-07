@@ -19,6 +19,11 @@ public class AudioController : Singleton<AudioController>
     public AudioClip loseSound;
     public AudioClip[] backgroundMusics;
 
+    public override void Awake()
+    {
+        MakeSingleton(true);
+    }
+
     public override void Start()
     {
         PlayBackgroundMusic();

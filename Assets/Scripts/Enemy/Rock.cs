@@ -45,7 +45,6 @@ public class Rock : MonoBehaviour
 
             //GameGUIManager.Ins.ShowGameover(true);
             AudioController.Ins.PlaySound(AudioController.Ins.landSound);
-            AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
         }
         GameManager1.Ins.Score++;
     }

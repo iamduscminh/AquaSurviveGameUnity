@@ -9,6 +9,7 @@ public class GameGUIManager : Singleton<GameGUIManager>
 
     public GameObject homeGui;
     public GameObject gameoverGui;
+    public GameObject gameEndGui;
 
     public override void Awake()
     {
@@ -27,6 +28,12 @@ public class GameGUIManager : Singleton<GameGUIManager>
             gameoverGui.SetActive(iShow);
     }
 
+    public void ShowGameEndGui(bool iShow)
+    {
+        if (gameEndGui)
+            gameEndGui.SetActive(iShow);
+    }
+
     public void Play()
     {
         GameManager1.Ins.PlayGame();
@@ -39,7 +46,7 @@ public class GameGUIManager : Singleton<GameGUIManager>
 
     public void Quit()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
         Application.Quit();
     }
 

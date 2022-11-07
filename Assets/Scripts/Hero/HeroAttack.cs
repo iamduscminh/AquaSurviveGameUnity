@@ -87,14 +87,13 @@ public class HeroAttack : MonoBehaviour
     {
         animator.SetTrigger("isUnlock");
         Collider2D[] attackEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
         foreach (Collider2D attackEnemy in attackEnemies)
         {
             //if (attackEnemy.tag == "Prison" && this.powerLove == 1)
             if (attackEnemy.tag == "Prison" )
             {
                 Destroy(attackEnemy.gameObject);
-                EndGame();
+                StartCoroutine(EndGame());
             }
         }
     }
@@ -105,8 +104,10 @@ public class HeroAttack : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    private void EndGame()
-    {
-    }
 
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(2f);
+        GameGUIManager.Ins.ShowGameEndGui(true);
+    }
 }

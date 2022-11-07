@@ -33,6 +33,7 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
+        AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
         if (invulnerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 

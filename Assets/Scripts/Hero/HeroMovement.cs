@@ -216,7 +216,6 @@ public class HeroMovement : MonoBehaviour
             if (collision.gameObject.CompareTag("Saw"))
             {
                 gameObject.GetComponent<Health>().TakeDamage(0.5f);
-                AudioController.Ins.PlaySound(AudioController.Ins.loseSound);
                 if (SceneManager.GetActiveScene().buildIndex != 0)
                 {
                     transform.position = heroPos.Peek();

@@ -48,7 +48,7 @@ public class HeroMovement : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "Scene3")
             {
-                speed = 7f;
+                speed = 8f;
                 jumpingPower = 7f;
             }
             else

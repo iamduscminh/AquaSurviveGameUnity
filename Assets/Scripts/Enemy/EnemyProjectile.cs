@@ -45,7 +45,6 @@ public class EnemyProjectile : EnemyDamage
         hit = true;
         base.OnTriggerEnter2D(collision); //Execute logic from parent script first
         coll.enabled = false;
-
         if (anim != null)
             anim.SetTrigger("isExplode"); //When the object is a fireball explode it
         else

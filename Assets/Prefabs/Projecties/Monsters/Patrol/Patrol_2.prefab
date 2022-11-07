@@ -207,6 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   distance: 0.7
+  target: {fileID: 2559094655236199245, guid: e1d050e32d6f48a4c8183f4003764239, type: 3}
+  attacker: {fileID: 5241131753919903578}
   groundDetection: {fileID: 5241131753824153693}
 --- !u!60 &5241131753919903585
 PolygonCollider2D:

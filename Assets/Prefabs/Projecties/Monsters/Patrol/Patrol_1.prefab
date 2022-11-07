@@ -163,6 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   distance: 3
+  target: {fileID: 2559094655236199245, guid: e1d050e32d6f48a4c8183f4003764239, type: 3}
+  attacker: {fileID: 2616868017447337704}
   groundDetection: {fileID: 2616868017901874800}
 --- !u!61 &2616868017447330070
 BoxCollider2D:

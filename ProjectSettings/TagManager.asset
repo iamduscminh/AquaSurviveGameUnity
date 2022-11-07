@@ -25,8 +25,12 @@ TagManager:
   - TextV
   - TextE
   - Heal
+<<<<<<< HEAD
   - Reward
   - Prison
+=======
+  - Patrol
+>>>>>>> 2d37c6b81cabc6cd583b06232e63e1642f1cdb56
   layers:
   - Default
   - TransparentFX

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PatrolBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     public float speed;
     public float distance;
+    public Transform target;
+    public GameObject attacker;
     private bool moveRight = true;
     public Transform groundDetection;
 
@@ -45,5 +49,18 @@ public class PatrolBehavior : MonoBehaviour
                 moveRight = true;
             }
         }
+        if (collision.collider.GetType() == typeof(CapsuleCollider2D))
+        {
+            gameObject.SetActive(false);
+            Invoke("Respawn", 30f);
+        }
+    }
+    void Respawn()
+    {
+        GameObject enemyClone = (GameObject)Instantiate(gameObject);
+        enemyClone.transform.position = transform.position;
+        enemyClone.SetActive(true);
+        Destroy(gameObject);
     }
 }
+

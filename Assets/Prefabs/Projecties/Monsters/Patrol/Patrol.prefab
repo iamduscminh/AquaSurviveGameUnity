@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5802582459674253653}
   - component: {fileID: 5802582459674253650}
   - component: {fileID: 5802582459674253648}
-  - component: {fileID: 5802582459674253651}
   m_Layer: 0
   m_Name: Patrol
   m_TagString: Untagged
@@ -193,20 +192,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.09793377, y: 0.010489464}
   m_EdgeRadius: 0
---- !u!114 &5802582459674253651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5802582459674253673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd92211d912f16e42b553a7e9dd39811, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  attacker: {fileID: 5802582459674253673}
 --- !u!1 &5802582459739539300
 GameObject:
   m_ObjectHideFlags: 0

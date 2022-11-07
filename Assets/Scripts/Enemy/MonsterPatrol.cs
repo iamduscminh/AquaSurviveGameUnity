@@ -14,7 +14,7 @@ public class MonsterPatrol : MonoBehaviour
     [Header("Movement parameters")]
     [SerializeField] private float speed;
     private Vector3 initScale;
-    public bool movingLeft;
+    private bool movingLeft;
 
     [Header("Idle Behaviour")]
     [SerializeField] private float idleDuration;

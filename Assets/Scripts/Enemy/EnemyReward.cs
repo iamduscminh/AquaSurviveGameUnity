@@ -25,4 +25,10 @@ public class EnemyReward : MonoBehaviour
             Reward.SetActive(true);
         }
     }
+    private void ActiveReward(GameObject Reward)
+    {
+
+        Reward.SetActive(true);
+
+    }
 }

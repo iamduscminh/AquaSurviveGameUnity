@@ -8,6 +8,7 @@ public class WarriorEnemy : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float damage;
+    [SerializeField] public float speed;
 
     [Header("Collider Parameters")]
     [SerializeField] private float colliderDistance;
@@ -16,16 +17,23 @@ public class WarriorEnemy : MonoBehaviour
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
-
+    public Transform player;
+    public bool isFlipped = false;
+    public bool checkFirst = true;
+    
     //References
     private Animator anim;
+    private HealthEnemy healthEnemy;
     private Health playerHealth;
     private MonsterPatrol enemyPatrol;
+    private SpriteRenderer sprite;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        healthEnemy = GetComponent<HealthEnemy>();
         enemyPatrol = GetComponentInParent<MonsterPatrol>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -44,6 +52,10 @@ public class WarriorEnemy : MonoBehaviour
 
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInSight();
+
+        UpdatePower();
+        if(healthEnemy.currentHealth <= healthEnemy.startingHealth / 2) sprite.color = Color.red;
+        Debug.Log(sprite.color);
     }
 
     private bool PlayerInSight()
@@ -69,5 +81,34 @@ public class WarriorEnemy : MonoBehaviour
     {
         if (PlayerInSight())
             playerHealth.TakeDamage(damage);
+    }
+
+    public void LookAtPlayer()
+    {
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if (transform.position.x > player.position.x && isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = false;
+        }
+        else if (transform.position.x < player.position.x && !isFlipped)
+        {
+            transform.localScale = flipped;
+            transform.Rotate(0f, 180f, 0f);
+            isFlipped = true;
+        }
+    }
+    private void UpdatePower()
+    {
+        if (checkFirst && healthEnemy.currentHealth <= healthEnemy.startingHealth / 2)
+        {
+            sprite.color = Color.red;
+            speed += 3f;
+            damage += 1.5f;
+            checkFirst = false;
+        }
     }
 }

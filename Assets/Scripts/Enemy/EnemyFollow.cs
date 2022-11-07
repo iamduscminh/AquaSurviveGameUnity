@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    private Transform EnemyTransform;
-    private GameObject player;
-    private Rigidbody2D rb;
-    public float moveSpeed = 3f;
-    private Vector2 movement;
+    public GameObject player;
 
-    //References
-    private Animator anim;
+    public float speed;
+    private float distance;
+    public float distanceBetween;
+
+
+    ////References
+    //private Animator anim;
     void Start()
     {
-        // Vì preFab ko cho g?n game obj ? bên ngoài nên ta s? khai báo private ?? x? lý trong code
-        player = GameObject.Find("Hero"); //tim game obj can duoi theo
-        EnemyTransform = player.transform; //ep lai kieu
-        rb = this.GetComponent<Rigidbody2D>();
+        //anim = player.GetComponent<Animator>();
     }
     void Update()
     {
-        Vector3 direction = EnemyTransform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle;
+
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
-        movement = direction;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        if(distance < distanceBetween)
+        {
+            //anim.SetBool("isRun", true);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+        }
+
+        
     }
-    private void FixedUpdate()
-    {
-        moveCharacter(movement);
-    }
-    void moveCharacter(Vector2 direction)
-    {
-        //anim.SetBool("isRun", true);
-        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
-    }
+   
 }

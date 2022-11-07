@@ -12,7 +12,8 @@ public class EnemyProjectile : EnemyDamage
     public GameObject enemyParentGO;
     public int EnemyDirection { get { return (enemyParentGO.transform.localScale.x > 0) ? 1 : -1; } }
     private bool hit;
-
+    private bool checkFirst = true;
+    
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -34,6 +35,9 @@ public class EnemyProjectile : EnemyDamage
         lifetime += Time.deltaTime;
         if (lifetime > resetTime)
             gameObject.SetActive(false);
+
+        UpdateSpped();
+        Debug.Log(speed+ " - " + damage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,5 +54,14 @@ public class EnemyProjectile : EnemyDamage
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+    private void UpdateSpped()
+    {
+        if (checkFirst && enemyParentGO.GetComponent<HealthEnemy>().currentHealth <= (enemyParentGO.GetComponent<HealthEnemy>().startingHealth / 2))
+        {
+             speed += 4f;
+            damage += 1.5f;
+            checkFirst = false;
+        }
     }
 }

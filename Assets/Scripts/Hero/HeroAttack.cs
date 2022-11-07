@@ -90,7 +90,8 @@ public class HeroAttack : MonoBehaviour
 
         foreach (Collider2D attackEnemy in attackEnemies)
         {
-            if (attackEnemy.tag == "Prison" && this.powerLove == 7)
+            //if (attackEnemy.tag == "Prison" && this.powerLove == 1)
+            if (attackEnemy.tag == "Prison" )
             {
                 Destroy(attackEnemy.gameObject);
                 EndGame();
